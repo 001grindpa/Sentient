@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*, html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+body {
+    position: relative;
+}
+#landing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.r2 {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+.r2 img {
+    width: 100px;
+}
+.sideNote {
+    font-size: x-small;
+    font-weight: bold;
+    color: white;
+    background: black;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+    border-radius: 10px;
+    margin: 5px;
+}
+.section-1 {
+    text-align: center;
+    margin: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 1.4;
+}
+.section-1 h1, .section-1 h1 + div {
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 10px;
+}
+form button {
+    background-image: linear-gradient(rgba(2, 255, 255, 0.582), rgba(0, 70, 70, 0.582));
+    border: none;
+    padding: 15px;
+    padding-left: 35px;
+    padding-right: 35px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+form button:hover {
+    background-color: rgb(0, 158, 158);
+}
+.section-2 {
+    background-color: whitesmoke;
+    margin: 15px;
+    margin: auto;
+    border-radius: 20px;
+    padding: 15px;
+    width: 450px;
+}
+.section-2 img {
+    width: 30px;
+    height: 30px;
+}
+.section-2 .content {
+    display: flex;
+    gap: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.section-2 img + div {
+    width: 70%;
+    line-height: 1.4;
+}
+.section-2 img + div div:nth-child(1) {
+    font-weight: bold;
+}
+#learn {
+    display: none;
+}
+#learn:checked ~ .contentCont {
+    display: block;
+} 
+#learn + label {
+    display: block;
+    width: fit-content;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    background-color: rgba(144, 238, 144, 0.589);
+    margin: auto;
+    transform: translateX(-150px);
+    margin-top: 10px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.548);
+    transition: 0.3s;
+    cursor: pointer;
+}
+#learn + label:hover {
+    background-color: rgb(117, 179, 117);
+}
+.contentCont {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.404);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    backdrop-filter: blur(3px);
+    display: none;
+}
+.contentCont .content {
+    position: relative;
+    width: 400px;
+    padding: 10px;
+    background-color: lightgreen;
+    margin: auto;
+    margin-top: 15rem;
+    padding: 10px;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, 0.678);
+}
+.content h3 {
+    background-color: white;
+    padding: 10px;
+    width: fit-content;
+    margin-bottom: 10px;
+    color: rgb(109, 180, 109);
+}
+.content a {
+    color: inherit;
+    font-size: small;
+    padding: 5px;
+}
+.content a:hover {
+    color: blue;
+}
+.visit {
+    margin-top: 20px;
+}
+footer {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    margin-top: 150px;
+}
+footer .note {
+    width: fit-content;
+    margin: auto;
+    font-size: x-small;
+    margin-bottom: 5px;
+}
+footer .note span {
+    font-weight: bold;
+}
+footer .socials img {
+    width: 40px;
+    background-color: rgb(97, 196, 97);
+    padding: 3px;
+    border-radius: 10px;
+    opacity: 0.6;
+    transition: 0.2s;
+}
+footer .socials img:hover {
+    opacity: 1;
+}
+footer .socials {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+footer .socials + div {
+    width: fit-content;
+    margin: auto;
+    font-size: small;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

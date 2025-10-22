@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <header>
+        <div class="r2">
+            <img src="{{ url_for('static', filename='images/r2-w3_logo.png') }}" alt="r2-w3_logo">
+        </div>
+        <div class="sideNote">Another Masterpiece</div>
+    </header>
+    <main>
+        <div class="section-1">
+            <h1>Web3 Research Intelligence Agent</h1>
+            <div>Streamline your Web3 project research with our intelligent assistant. Powered by Sentient AGI</div>
+            <form action="#" method="post">
+                <input type="hidden" value="launch">
+                <button type="submit">Get Started</button>
+            </form>
+        </div>
+        <div class="section-2">
+            <h3>Key Features</h3>
+            <div class="content">
+                <img src="{{ url_for('static', filename='images/search.png') }}" alt="search_icon">
+                <div>
+                    <div>Automated Data Collection</div>
+                    <div>Scrape project data from Twitter(X), CoinMarketCap and more.</div>
+                </div>
+            </div>
+            <div class="content">
+                <img src="{{ url_for('static', filename='images/doc.png') }}" alt="doc_icon">
+                <div>
+                    <div>Intelligent Summarization</div>
+                    <div>Summarizes whitepapers and roadmaps with just one click.</div>
+                </div>
+            </div>
+            <div class="content">
+                <img src="{{ url_for('static', filename='images/histo.png') }}" alt="histogram_icon">
+                <div>
+                    <div>Project Ranking</div>
+                    <div>Analyse project funding, investors and social engagement.</div>
+                </div>
+            </div>
+        </div>
+        <div class="learnMore">
+            <input type="checkbox" id="learn">
+            <label for="learn">Learn More</label>
+            <div class="contentCont">
+                <div class="content">
+                    <h3>About R2-W3</h3>
+                    <div>This intelligent agent streamlines Web3 project research by automatically gathering and analyzing key information from sources like Twitter, Crunchbase, DeFiLlama, and GitHub.</div><br><div>It identifies investors, funding rounds, token data, and roadmap milestones, then summarizes whitepapers and community traction using advanced LLM reasoning. Built with the Sentient AGI Framework, the agent operates asynchronously, coordinating tasks efficiently allowing real-time insights, ranking of projects by investor quality, and sentiment-based scoring.</div><br><div>It's your all-in-one research assistant for discovering, comparing, and tracking the next big opportunities in Web3.</div>
+                    <div class="visit"><a href="https://www.sentient.xyz/">visit Sentient</a></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="note">A project enginnered by <span>Anyanwu Francis (0xGrindpa)</span></div>
+        <div class="socials">
+            <a href="https://x.com/0xGrindpa?t=OA_FuyBeu8qw6esI1mKOaQ&s=09"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x"></a>
+            <a href="https://chat.whatsapp.com/GXcz2dR0A9TACfJcerFI7S?mode=ems_copy_t"><img src="{{ url_for('static', filename='images/whatsapp.png') }}" alt="WhatsApp"></a>
+        </div>
+        <div>&copy; 2025 Agent R2-W3 All Rights Reserved</div>
+    </footer>
+
+{% endblock %}
