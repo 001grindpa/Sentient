@@ -7,7 +7,7 @@ load_dotenv
 
 class web3Researcher(AbstractAgent):
     async def assist(self, session, query, response_handler: ResponseHandler):
-        prompt = f"You're a web3 expert researcher. Answer clearly\n{query}"
+        prompt = f"You're a web3 expert researcher. Answer clearly and professionally\n{query}"
 
         headers = {
             "Autorisation": f"Bearer {os.getenv("API_KEY_SENTIENT")}",
