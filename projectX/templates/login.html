@@ -8,5 +8,28 @@
         </div>
         <div class="sideNote">Another Masterpiece</div>
     </header>
+    <main>
+        <div class="signupNotice"><i>Bwoop-beep! Hello... whirr-tweet-tweet... welcome back!</i></div>
+        <form id="signup" action="/signup" method="post">
+            <div>
+                <div>username</div>
+                <input type="text" name="username" autofocus placeholder="username field" autocomplete="off" required>
+            </div>
+            <div>
+                <div>password</div>
+                <input id="p" type="text" name="password" placeholder="password field" autocomplete="off" required>
+            </div>
+            <button id="submit">Sign up</button>
+            <div>Don't own an account? <a href="/signup">sign up</a></div>
+        </form>
+    </main>
+    <footer>
+        <div class="note">A project enginnered by <span>Anyanwu Francis (0xGrindpa)</span></div>
+        <div class="socials">
+            <a href="https://x.com/0xGrindpa?t=OA_FuyBeu8qw6esI1mKOaQ&s=09"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x"></a>
+            <a href="https://chat.whatsapp.com/GXcz2dR0A9TACfJcerFI7S?mode=ems_copy_t"><img src="{{ url_for('static', filename='images/whatsapp.png') }}" alt="WhatsApp"></a>
+        </div>
+        <div>&copy; 2025 Agent R2-W3 All Rights Reserved</div>
+    </footer>
 
 {% endblock %}

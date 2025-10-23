@@ -225,6 +225,12 @@ footer .socials + div {
 #signup .r2Mood {
     font-size: small;
 }
+#signup .r2Mood + div {
+    text-align: center;
+}
+#signup .r2Mood + div div {
+    text-align: left;
+}
 #signup input {
     padding: 5px;
     border-radius: 5px;
@@ -251,4 +257,16 @@ footer .socials + div {
 }
 #signup button + div a {
     color: cyan;
+}
+#username + div {
+    color: blue;
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+}
+.notice {
+    color: white;
+    font-size: small;
+    font-weight: bold;
+    margin-top: -4px;
 }
