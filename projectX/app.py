@@ -39,15 +39,20 @@ def signup():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
+        password_confirm = request.form.get("password_confirm")
 
         user_data = db.execute("SELECT * FROM userData")
         for data in user_data:
-            if data.get("username") == username and data.get("password") == password:
+            if data.get("username") == username:
+                return jsonify({"msg": "This username is not available"})
+            elif data.get("username") == username and data.get("password") == password:
                 return jsonify({"msg": "This account already exits, click 'Log in' to access your account"})
-        return redirect("/")
+        if password == password_confirm:
+            session["username"] = username
+            return redirect("/")
+        else:
+            return jsonify({"msg": "Password mismatched"})
     return render_template("signup.html", page_id="signup-page")
-
-
 
 if __name__ == "__main__":
     app.run(port=8000)
