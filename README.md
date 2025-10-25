@@ -18,4 +18,4 @@ Project Ranking
 -Analyse project funding, investors and social engagement.
 
 ### Installation
-```bash git clone https://github.com/001grindpa/Sentient.git```
+```git clone https://github.com/001grindpa/Sentient.git```
