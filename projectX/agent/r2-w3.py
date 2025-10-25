@@ -10,11 +10,11 @@ class web3Researcher(AbstractAgent):
         prompt = f"You're a web3 expert researcher. Answer clearly and professionally\n{query}"
 
         headers = {
-            "Autorisation": f"Bearer {os.getenv("API_KEY_SENTIENT")}",
+            "Authorization": f"Bearer {os.getenv("API_KEY_SENTIENT")}",
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "accounts/sentientfoundation/model/dobby-unhinged-llama-3-3-70b-new",
+            "model": "accounts/fireworks/models/llama-v3p1-8b-instruct",
             "messages": [{"role": "user", "content": prompt}],
             "max_token": 150
         }

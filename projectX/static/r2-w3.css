@@ -270,3 +270,158 @@ footer .socials + div {
     font-weight: bold;
     margin-top: -4px;
 }
+/* styling for log in page */
+#login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+#signup + div {
+    color: red;
+    font-size: small;
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* styling for index page */
+#index {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+.chatZoneCont {
+    background-color: rgb(145, 231, 145);
+    padding-top: 5px;
+    padding-bottom: 7px;
+    width: 450px;
+    height: fit-content;
+    margin: auto;
+}
+.chatZoneCont h4 {
+    font-weight: bold;
+    background-color: gray;
+    color: white;
+    width: fit-content;
+    padding: 5px;
+}
+.chatZoneCont .H {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.chatZone {
+    background-color: white;
+    padding: 10px;
+    height: 300px;
+    margin: 5px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+.r2Text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.r2Text .gif {
+    background-color: transparent;
+    width: 70px;
+    height: 70px;
+    display: none;
+}
+.r2Text img {
+    width: 35px;
+    height: 35px;
+    background-color: cyan;
+    border-radius: 10px;
+}
+.r2Text img + div {
+    width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(236, 235, 235);
+}
+.chatZone  .userChat {
+    width: 300px;
+    text-align: right;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(109, 173, 109);
+    margin-left: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: white;
+}
+#querry {
+    display: flex;
+    width: 90%;
+    margin: 3px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    outline: 1px solid rgb(236, 235, 235);
+}
+#querry input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+#querry button {
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border: none;
+    background-color: cyan;
+}
+.logout a {
+    background-color: white;
+    color: blue;
+    font-size: small;
+    text-decoration: none;
+    padding: 5px;
+}
+.logout a:hover {
+    color: red;
+}
+.info {
+    width: 400px;
+    background-color: gray;
+    height: fit-content;
+    margin: auto;
+    margin-top: 40px;
+    transform: translateX(-25px);
+    border-radius: 10px;
+}
+.info h4 {
+    padding: 10px;
+    color: white;
+}
+.info .divider {
+    width: 100%;
+    height: 1px;
+    background-color: white;
+}
+.info .infoArea {
+    padding: 10px;
+    color: white;
+}
+@media(min-width: 900px) {
+    #index main {
+        display: grid;
+        width: 930px;
+        margin: auto;
+        justify-content: center;
+        align-items: start;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .info {
+        margin: 0;
+        margin-left: 50px;
+    }
+}

@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-    if (document.body.id === "index") {
-        console.log("yet to add any js");
-    }
 
     // js for sign up page
-    else if (document.body.id === "signup-page") {
+    if (document.body.id === "signup-page") {
         let form = document.querySelector("#signup");
         let username = document.querySelector("#username");
         let p = document.querySelector("#p");
@@ -41,26 +38,91 @@ document.addEventListener("DOMContentLoaded", function() {
             if (p2.value === "") {
                 notice.textContent = "";
             }
-        })
+        });
     }
     // js for login page
     else if (document.body.id === "login") {
         const form = document.querySelector("#signup");
+        let submit = document.querySelector("#submit");
 
-        form.addEventListener("submit", async (e) => {
+        form.addEventListener("input", async (e) => {
             let newForm = new FormData(form);
 
             try {
-                let response = await fetch("/login", {
+                let response = await fetch("/loginCheck", {
                     method: "POST",
                     body: newForm
                 })
                 let data = await response.json();
                 console.log(JSON.stringify(data));
+
+                if (data.msg === "This account does not exist, please click 'sign up' to create an account") {
+                    submit.disabled = true;
+                }
+                else {
+                    submit.disabled = false;
+                }
             }
             catch(error) {
                 console.log(error);
             }
-        })
+        });
+    }
+    // js for home page
+    else if (document.body.id === "index") {
+        let form = document.querySelector("#querry");
+        let input = document.querySelector("#querry input");
+        let btn = document.querySelector("#qBtn");
+        let chatZone = document.querySelector(".chatZone");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            let newForm = new FormData(form);
+            let queryText = newForm.get("q");
+            input.value = "";
+            
+            // payload = {
+            //     query: queryText
+            // };
+
+            // let response = await fetch("/assist", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json"
+            //     },
+            //     body: JSON.stringify(payload)
+            // })
+            // let data = response.json();
+            let response = await fetch("/test?q=" + queryText)
+            let data = await response.json();
+
+            let user = document.createElement("div");
+            user.classList.add("userchat");
+            user.textContent = queryText;
+            chatZone.appendChild(user);
+
+            let r2 = document.createElement("div");
+            r2.classList.add("r2Text");
+            let img = document.createElement("img");
+            img.src = "static/images/r2-w3_logo2.png";
+            let gif = document.createElement("img");
+            gif.classList.add("gif");
+            gif.src = "static/gif/loading2.gif"
+            let r2T = document.createElement("div");
+            r2T.textContent = data.msg;
+
+            gif.style.display = "block"
+            r2.appendChild(gif);
+            chatZone.appendChild(r2);
+
+            setTimeout(() => {
+                gif.style.display = "none";
+                r2.appendChild(img);
+                r2.appendChild(r2T);
+            }, 2000);
+            
+            console.log(data.msg);
+        });
     }
 })

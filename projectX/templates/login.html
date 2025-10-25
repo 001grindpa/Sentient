@@ -10,7 +10,7 @@
     </header>
     <main>
         <div class="signupNotice"><i>Bwoop-beep! Hello... whirr-tweet-tweet... welcome back!</i></div>
-        <form id="signup" action="/signup" method="post">
+        <form id="signup" action="/login" method="post">
             <div>
                 <div>username</div>
                 <input type="text" name="username" autofocus placeholder="username field" autocomplete="off" required>
@@ -19,9 +19,10 @@
                 <div>password</div>
                 <input id="p" type="text" name="password" placeholder="password field" autocomplete="off" required>
             </div>
-            <button id="submit">Sign up</button>
+            <button id="submit">Log in</button>
             <div>Don't own an account? <a href="/signup">sign up</a></div>
         </form>
+        <div>Note: If the login button remains disabled it means this account does not exist.</div>
     </main>
     <footer>
         <div class="note">A project enginnered by <span>Anyanwu Francis (0xGrindpa)</span></div>

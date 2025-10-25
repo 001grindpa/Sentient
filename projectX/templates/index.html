@@ -8,5 +8,40 @@
         </div>
         <div class="sideNote">Another Masterpiece</div>
     </header>
+    <main>
+        <div class="chatZoneCont">
+            <div class="H">
+                <h4>Powered by Sentient</h4>
+                <div class="logout"><a href="/logout">logout</a></div>
+            </div>
+            <div class="chatZone">
+                <div class="r2Text">
+                    <img class="gif" src="{{ url_for('static', filename='gif/loading2.gif') }}" alt="loading_gif">
+                    <img src="{{ url_for('static', filename='images/r2-w3_logo2.png') }}" alt="r2_logo">
+                    <div>Hello {{ session.get("username") }} 👋, {{ msg }}</div>
+                </div>
+                <!-- <div class="userchat">Tell me more about Sentient</div> -->
+            </div>
+            <form id="querry" action="#" method="post">
+                <input name="q" type="text" autocomplete="off" autofocus placeholder="Type your querry...">
+                <button id="qBtn">Send</button>
+            </form>
+        </div>
+        <div class="info">
+            <h4>Project Info</h4>
+            <div class="divider"></div>
+            <div class="infoArea">
+                <div>...</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="note">A project enginnered by <span>Anyanwu Francis (0xGrindpa)</span></div>
+        <div class="socials">
+            <a href="https://x.com/0xGrindpa?t=OA_FuyBeu8qw6esI1mKOaQ&s=09"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x"></a>
+            <a href="https://chat.whatsapp.com/GXcz2dR0A9TACfJcerFI7S?mode=ems_copy_t"><img src="{{ url_for('static', filename='images/whatsapp.png') }}" alt="WhatsApp"></a>
+        </div>
+        <div>&copy; 2025 Agent R2-W3 All Rights Reserved</div>
+    </footer>
 
 {% endblock %}
