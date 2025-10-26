@@ -19,8 +19,8 @@ def index():
     n = randint(1, 6)
     start = {
         1: "what's on your mind?", 2: "how do we start off?",
-        3: "let's hit the road running haha.", 4: "how can i assist you?",
-        5: "i'm R2, can't wait to work with you.", 6: "let's talk about that web3 stuff."
+        3: "let's hit the road running haha.", 4: "how can I assist you?",
+        5: "I'm R2, can't wait to work with you.", 6: "let's talk about that web3 stuff."
         }
     msg = start[n]
 

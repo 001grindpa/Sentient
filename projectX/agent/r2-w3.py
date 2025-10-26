@@ -3,20 +3,20 @@ from sentient_agent_framework import AbstractAgent, DefaultServer, ResponseHandl
 from dotenv import load_dotenv
 import os
 
-load_dotenv
+load_dotenv()
 
 class web3Researcher(AbstractAgent):
     async def assist(self, session, query, response_handler: ResponseHandler):
-        prompt = f"You're a web3 expert researcher. Answer clearly and professionally\n{query}"
+        prompt = f"Your name is R2-W3(R2 for short) You're a web3 expert researcher. Answer clearly and professionally\n{query}"
 
         headers = {
-            "Authorization": f"Bearer {os.getenv("API_KEY_SENTIENT")}",
+            "Authorization": f"Bearer {os.getenv("FIREWORKS_API_KEY")}",
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "accounts/fireworks/models/llama-v3p1-8b-instruct",
+            "model": "accounts/sentientfoundation/models/dobby-unhinged-llama-3-3-70b-new",
             "messages": [{"role": "user", "content": prompt}],
-            "max_token": 150
+            "max_tokens": 150
         }
 
         async with httpx.AsyncClient() as client:

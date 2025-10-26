@@ -81,21 +81,23 @@ document.addEventListener("DOMContentLoaded", function() {
             let newForm = new FormData(form);
             let queryText = newForm.get("q");
             input.value = "";
+            console.log(queryText)
             
-            // payload = {
-            //     query: queryText
-            // };
+            payload = {
+                query: queryText
+            };
 
-            // let response = await fetch("/assist", {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     },
-            //     body: JSON.stringify(payload)
-            // })
-            // let data = response.json();
-            let response = await fetch("/test?q=" + queryText)
-            let data = await response.json();
+            let response = await fetch("/assist", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            let data = response.json();
+            console.log(data)
+            // let response = await fetch("/test?q=" + queryText)
+            // let data = await response.json();
 
             let user = document.createElement("div");
             user.classList.add("userchat");
@@ -110,7 +112,8 @@ document.addEventListener("DOMContentLoaded", function() {
             gif.classList.add("gif");
             gif.src = "static/gif/loading2.gif"
             let r2T = document.createElement("div");
-            r2T.textContent = data.msg;
+            // r2T.textContent = data.msg;
+            r2T.textContent = data.text;
 
             gif.style.display = "block"
             r2.appendChild(gif);
