@@ -36,12 +36,12 @@ def assist1():
         query = request.json["query"]
         # query = request.form.get("q")
         messages = [{"role": "user", 
-                     "content": f"Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> (you don't need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's name is {session.get("username")}, the current page footer contains text that tells the user you're in beta and can't remember conversations, tell user to read that information at the footer when they raise related complaints). You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"
+                     "content": f"Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> (you don't need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's name is {session.get("username")}, the current page footer contains text that tells the user you're in beta and can't remember conversations, tell user to read that information at the footer when they raise related complaints, do not respond to queries with curse words). You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"
                      }]
 
         headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
-        payload = {"model": "accounts/fireworks/models/llama-v3p1-8b-instruct",
+        payload = {"model": "accounts/sentientfoundation/models/dobby-unhinged-llama-3-3-70b-new",
                    "messages": messages,
                    "max_tokens": 150,
                    }
@@ -64,7 +64,7 @@ def assist2():
 
         headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
-        payload2 = {"model": "accounts/fireworks/models/llama-v3p1-8b-instruct",
+        payload2 = {"model": "accounts/sentientfoundation/models/dobby-unhinged-llama-3-3-70b-new",
                    "messages": messages2,
                    "max_tokens": 150,
                    }

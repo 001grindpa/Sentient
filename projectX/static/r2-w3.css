@@ -19,6 +19,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-bottom: 50px;
 }
 .r2 {
     display: flex;
@@ -175,6 +176,7 @@ footer .note + div {
     font-size: small;
     width: fit-content;
     margin: auto;
+    text-align: center;
 }
 footer .note span {
     font-weight: bold;
