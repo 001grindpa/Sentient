@@ -5,6 +5,7 @@
     <header>
         <div class="r2">
             <img src="{{ url_for('static', filename='images/r2-w3_logo.png') }}" alt="r2-w3_logo">
+            <div>Beta</div>
         </div>
         <div class="sideNote">Another Masterpiece</div>
     </header>
@@ -18,9 +19,9 @@
                 <div class="r2Text">
                     <img class="gif" src="{{ url_for('static', filename='gif/loading2.gif') }}" alt="loading_gif">
                     <img src="{{ url_for('static', filename='images/r2-w3_logo2.png') }}" alt="r2_logo">
-                    <div>Hello {{ session.get("username") }} 👋, {{ msg }}</div>
+                    <div class="rText"><div>Hello {{ session.get("username") }} 👋, {{ msg }}</div></div>
                 </div>
-                <!-- <div class="userchat">Tell me more about Sentient</div> -->
+                <!-- <div class="userchat"><div>Tell me more about Sentient</div></div> -->
             </div>
             <form id="querry" action="#" method="post">
                 <input name="q" type="text" autocomplete="off" autofocus placeholder="Type your querry...">
@@ -37,6 +38,7 @@
     </main>
     <footer>
         <div class="note">A project enginnered by <span>Anyanwu Francis (0xGrindpa)</span></div>
+        <div>This Beta version does not remember conversations, upgrade coming soon.</div>
         <div class="socials">
             <a href="https://x.com/0xGrindpa?t=OA_FuyBeu8qw6esI1mKOaQ&s=09"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x"></a>
             <a href="https://chat.whatsapp.com/GXcz2dR0A9TACfJcerFI7S?mode=ems_copy_t"><img src="{{ url_for('static', filename='images/whatsapp.png') }}" alt="WhatsApp"></a>

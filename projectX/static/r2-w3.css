@@ -25,6 +25,10 @@ header {
     align-items: center;
     width: fit-content;
 }
+.r2 div {
+    font-weight: bold;
+    color: red;
+}
 .r2 img {
     width: 100px;
 }
@@ -166,7 +170,11 @@ footer .note {
     width: fit-content;
     margin: auto;
     font-size: x-small;
-    margin-bottom: 5px;
+}
+footer .note + div {
+    font-size: small;
+    width: fit-content;
+    margin: auto;
 }
 footer .note span {
     font-weight: bold;
@@ -325,7 +333,7 @@ footer .socials + div {
 }
 .r2Text {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 5px;
 }
 .r2Text .gif {
@@ -340,21 +348,28 @@ footer .socials + div {
     background-color: cyan;
     border-radius: 10px;
 }
-.r2Text img + div {
+.r2Text .rText {
     width: 300px;
+}
+.r2Text .rText div {
+    width: fit-content;
     padding: 10px;
     border-radius: 10px;
     background-color: rgb(236, 235, 235);
 }
-.chatZone  .userChat {
+.chatZone .userChat {
     width: 300px;
-    text-align: right;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: rgb(109, 173, 109);
     margin-left: auto;
     margin-top: 15px;
     margin-bottom: 15px;
+    text-align: right;
+}
+.chatZone .userChat div {
+    width: fit-content;
+    margin-left: auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(109, 173, 109);
     color: white;
 }
 #querry {

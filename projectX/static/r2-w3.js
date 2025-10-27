@@ -1,7 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
+    //js for landing page
+    if (document.body.id === "landing") {
+        let checkBox = document.querySelector("#learn");
+        let contentCont = document.querySelector(".contentCont");
+        let content = contentCont.querySelector(".content");
 
+        contentCont.addEventListener("click", ()=> {
+            if (checkBox.checked === true) {
+                checkBox.checked = false;
+            }
+        });
+        content.addEventListener("click", function(e) {
+            e.stopPropagation();
+        });
+    }
     // js for sign up page
-    if (document.body.id === "signup-page") {
+    else if (document.body.id === "signup-page") {
         let form = document.querySelector("#signup");
         let username = document.querySelector("#username");
         let p = document.querySelector("#p");
@@ -82,6 +96,26 @@ document.addEventListener("DOMContentLoaded", function() {
             let queryText = newForm.get("q");
             input.value = "";
             console.log(queryText)
+
+            let user = document.createElement("div");
+            user.classList.add("userchat");
+            let uDiv = document.createElement("div");
+            user.appendChild(uDiv);
+            uDiv.textContent = queryText;
+            chatZone.appendChild(user);
+
+            let r2 = document.createElement("div");
+            r2.classList.add("r2Text");
+            let img = document.createElement("img");
+            img.src = "static/images/r2-w3_logo2.png";
+            let gif = document.createElement("img");
+            gif.classList.add("gif");
+            gif.src = "static/gif/loading2.gif"
+            gif.style.display = "block"
+            r2.appendChild(gif);
+
+            chatZone.appendChild(r2);
+            chatZone.scrollTop = chatZone.scrollHeight;
             
             payload = {
                 query: queryText
@@ -94,38 +128,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
                 body: JSON.stringify(payload)
             })
-            let data = response.json();
-            console.log(data)
+            let data = await response.json();
+            console.log(data.msg);
             // let response = await fetch("/test?q=" + queryText)
             // let data = await response.json();
 
-            let user = document.createElement("div");
-            user.classList.add("userchat");
-            user.textContent = queryText;
-            chatZone.appendChild(user);
-
-            let r2 = document.createElement("div");
-            r2.classList.add("r2Text");
-            let img = document.createElement("img");
-            img.src = "static/images/r2-w3_logo2.png";
-            let gif = document.createElement("img");
-            gif.classList.add("gif");
-            gif.src = "static/gif/loading2.gif"
             let r2T = document.createElement("div");
-            // r2T.textContent = data.msg;
-            r2T.textContent = data.text;
+            r2T.classList.add("rText")
+            let rDiv = document.createElement("div");
+            r2T.appendChild(rDiv);
+            rDiv.textContent = data.msg;
 
-            gif.style.display = "block"
-            r2.appendChild(gif);
-            chatZone.appendChild(r2);
 
             setTimeout(() => {
                 gif.style.display = "none";
                 r2.appendChild(img);
                 r2.appendChild(r2T);
+                chatZone.scrollTop = chatZone.scrollHeight;
             }, 2000);
             
-            console.log(data.msg);
+            // console.log(data.msg);
         });
     }
 })

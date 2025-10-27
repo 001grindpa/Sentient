@@ -1,13 +1,17 @@
 from flask import Flask, session, render_template, redirect, request, url_for, jsonify
 from flask_session import Session
 from cs50 import SQL
-import requests
-import ulid
+import httpx
+import os
+from dotenv import load_dotenv
 from random import randint
+load_dotenv()
 
 db = SQL("sqlite:///r2-w3.db")
 
 app = Flask(__name__)
+api_key = os.getenv("FIREWORKS_API_KEY")
+
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -31,27 +35,19 @@ def assist():
     if request.method == "POST":
         query = request.json["query"]
         # query = request.form.get("q")
-        response = requests.post("http://127.0.0.1:8080/assist",
-            json={
-                "query": {
-                    "id": str(ulid.new()),
-                    "prompt": query
-                },
-                "session": {
-                    "id": session.get("username"),
-                    "processor_id": "default",
-                    "activity_id": str(ulid.new()),
-                    "request_id": str(ulid.new()),
-                    "interactions": []
-                }
-            },
-            headers={
-            "Content-Type": "application/json"
-            })
-        
-        print(response.text)
-        # print(query)
-        return jsonify(response.json())
+        messages = [{"role": "user", 
+                     "content": f"Your name is R2-W3 aka R2 (you dont need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's name is {session.get("username")}, remember user history based on the api key and their username). You're a super intelligent DeFi research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"}]
+
+        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+
+        payload = {"model": "accounts/fireworks/models/llama-v3p1-8b-instruct",
+                   "messages": messages,
+                   "max_tokens": 150,
+                   }
+        r = httpx.post("https://api.fireworks.ai/inference/v1/chat/completions", headers=headers, json=payload)
+        data = r.json()
+        print(data["choices"][0]["message"]["content"])
+        return jsonify({"msg": data["choices"][0]["message"]["content"]})
 
 @app.route("/landing")
 def landing():
