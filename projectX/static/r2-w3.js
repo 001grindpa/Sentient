@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let input = document.querySelector("#querry input");
         let btn = document.querySelector("#qBtn");
         let chatZone = document.querySelector(".chatZone");
+        let info = document.querySelector(".infoArea div");
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -120,8 +121,8 @@ document.addEventListener("DOMContentLoaded", function() {
             payload = {
                 query: queryText
             };
-
-            let response = await fetch("/assist", {
+            // response 1
+            let response = await fetch("/assist1", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -137,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
             r2T.classList.add("rText")
             let rDiv = document.createElement("div");
             r2T.appendChild(rDiv);
-            rDiv.textContent = data.msg;
+            rDiv.innerHTML = data.msg;
 
 
             setTimeout(() => {
@@ -146,6 +147,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 r2.appendChild(r2T);
                 chatZone.scrollTop = chatZone.scrollHeight;
             }, 2000);
+            
+            // response 1
+            let response2 = await fetch("/assist2", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            let data2 = await response2.json();
+            console.log(data2.msg);
+            console.log(`length: ${(data2.msg).length}`);
+            if ((data2.msg).length > 100) {
+                info.innerHTML = data2.msg;
+            }
             
             // console.log(data.msg);
         });

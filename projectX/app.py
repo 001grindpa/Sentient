@@ -30,13 +30,14 @@ def index():
 
     return render_template("index.html", page_id = "index", msg = msg)
 
-@app.route("/assist", methods=["POST", "GET"])
-def assist():
+@app.route("/assist1", methods=["POST", "GET"])
+def assist1():
     if request.method == "POST":
         query = request.json["query"]
         # query = request.form.get("q")
         messages = [{"role": "user", 
-                     "content": f"Your name is R2-W3 aka R2 (you dont need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's name is {session.get("username")}, remember user history based on the api key and their username). You're a super intelligent DeFi research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"}]
+                     "content": f"Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> (you don't need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's name is {session.get("username")}, the current page footer contains text that tells the user you're in beta and can't remember conversations, tell user to read that information at the footer when they raise related complaints). You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"
+                     }]
 
         headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
@@ -44,8 +45,34 @@ def assist():
                    "messages": messages,
                    "max_tokens": 150,
                    }
+        
         r = httpx.post("https://api.fireworks.ai/inference/v1/chat/completions", headers=headers, json=payload)
+        
         data = r.json()
+        print(data["choices"][0]["message"]["content"])
+        return jsonify({"msg": data["choices"][0]["message"]["content"]})
+
+@app.route("/assist2", methods=["POST", "GET"])
+def assist2():
+    if request.method == "POST":
+        query = request.json["query"]
+
+        messages2 = [{
+            "role": "user",
+            "content": f"strict instructions: check if my query contains a crypto project's name or project ticker, if true, your job is to return in html code, the project's name, about, website, whitepaper link and twitter follower count only in a very concise and brief response in the format 'Name: content.<p>About: content.<p>Website: content.<p>Whitepaper Link: content.<p>Twitter: content.', do not say anything afterwards. if query does not contain any crypto project's name reply '' \n query: {query}"
+        }]
+
+        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+
+        payload2 = {"model": "accounts/fireworks/models/llama-v3p1-8b-instruct",
+                   "messages": messages2,
+                   "max_tokens": 150,
+                   }
+        
+        r2 = httpx.post("https://api.fireworks.ai/inference/v1/chat/completions", headers=headers, json=payload2)
+
+        data = r2.json()
+
         print(data["choices"][0]["message"]["content"])
         return jsonify({"msg": data["choices"][0]["message"]["content"]})
 
