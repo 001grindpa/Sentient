@@ -16,6 +16,16 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+@app.context_processor
+def gen():
+    full_name = db.execute("SELECT full_name FROM userData WHERE username = ?", session.get("username"))
+    if full_name:
+        for f_name in full_name:
+            name = f_name.get("full_name")
+            return dict(name = name)
+    else:
+        return dict(name = "")
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if not session.get("username"):
@@ -35,8 +45,11 @@ def assist1():
     if request.method == "POST":
         query = request.json["query"]
         # query = request.form.get("q")
+        full_name = db.execute("SELECT full_name FROM userData WHERE username = ?", session.get("username"))
+        for f_name in full_name:
+            name = f_name.get("full_name")
         messages = [{"role": "user",
-                     "content": f"Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> though powered by Sentient Dobby LLM (you don't need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's name is {session.get("username")}, the current page footer contains text that tells the user you're in beta and can't remember conversations, do not respond to queries with bad words especially 'bull shit, fuck, bitch etc' or hash statements, be polite). You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"
+                     "content": f"Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> though powered by Sentient Dobby LLM (you don't need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's username is @{session.get("username")} and their actual name is {name} address them by their actual name, the current page footer contains text that tells the user you're in beta and can't remember conversations, do not respond to queries with bad words especially 'bull shit, fuck, bitch etc' or hash statements, be polite). You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"
                      }]
 
         headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
@@ -83,7 +96,7 @@ def landing():
 @app.route("/login", methods=["GET", "POST"])
 def signin():
     if request.method == "POST":
-        username = request.form.get("username")
+        username = request.form.get("username").lower()
         password = request.form.get("password")
 
         user_data = db.execute("SELECT * FROM userData")
@@ -115,7 +128,8 @@ def logout():
 @app.route("/signup", methods=["POST", "GET"])
 def signup():
     if request.method == "POST":
-        username = request.form.get("username")
+        name = request.form.get("name")
+        username = request.form.get("username").lower()
         password = request.form.get("password")
         password_confirm = request.form.get("password_confirm")
 
@@ -127,7 +141,7 @@ def signup():
                 return jsonify({"msg": "This account already exits, click 'Log in' below to access your account"})
 
         if password == password_confirm:
-            db.execute("INSERT INTO userData(username, password) VALUES(?, ?)", username, password)
+            db.execute("INSERT INTO userData(username, password, full_name) VALUES(?, ?, ?)", username, password, name)
             session["username"] = username
             session["password"] = password
             return redirect("/")
@@ -136,7 +150,7 @@ def signup():
 @app.route("/signupCheck", methods=["GET", "POST"])
 def signupCheck():
     if request.method == "POST":
-        username = request.form.get("username")
+        username = request.form.get("username").lower()
         password = request.form.get("password")
         password_confirm = request.form.get("password_confirm")
 
