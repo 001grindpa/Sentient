@@ -20,9 +20,21 @@ document.addEventListener("DOMContentLoaded", function() {
         let username = document.querySelector("#username");
         let p = document.querySelector("#p");
         let p2 = document.querySelector("#p2");
+        let eye = document.querySelector(".pass img");
         let submit = document.querySelector("#submit");
         let nameC = document.querySelector("#username + div");
         let notice = document.querySelector(".notice");
+
+        eye.addEventListener("click", () => {
+            if (p.type === "password") {
+                p.type = "text";
+                eye.src = "static/images/hide.png";
+            }
+            else {
+                p.type = "password";
+                eye.src = "static/images/view.png";
+            }
+        });
 
         form.addEventListener("input", async () => {
             let newForm = new FormData(form);
@@ -58,6 +70,18 @@ document.addEventListener("DOMContentLoaded", function() {
     else if (document.body.id === "login") {
         const form = document.querySelector("#signup");
         let submit = document.querySelector("#submit");
+        let eye = document.querySelector(".pass img");
+
+        eye.addEventListener("click", () => {
+            if (p.type === "password") {
+                p.type = "text";
+                eye.src = "static/images/hide.png";
+            }
+            else {
+                p.type = "password";
+                eye.src = "static/images/view.png";
+            }
+        });
 
         form.addEventListener("input", async (e) => {
             let newForm = new FormData(form);

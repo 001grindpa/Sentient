@@ -16,9 +16,11 @@
                 <div>username</div>
                 <input type="text" name="username" autofocus placeholder="username field" autocomplete="off" required>
             </div>
-            <div>
+            <div class="passCont">
                 <div>password</div>
-                <input id="p" type="text" name="password" placeholder="password field" autocomplete="off" required>
+                <div class="pass">
+                    <input id="p" type="password" name="password" placeholder="password field" autocomplete="off" required><div><img src="{{ url_for('static', filename='images/view.png') }}" alt="view"></div>
+                </div>
             </div>
             <button id="submit">Log in</button>
             <div>Don't own an account? <a href="/signup">sign up</a></div>
