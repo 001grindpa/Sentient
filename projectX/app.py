@@ -36,7 +36,7 @@ def assist1():
         query = request.json["query"]
         # query = request.form.get("q")
         messages = [{"role": "user", 
-                     "content": f"Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> though powered by Sentient Dobby LLM (you don't need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's name is {session.get("username")}, the current page footer contains text that tells the user you're in beta and can't remember conversations, do not respond to queries with curse words especially 'bull shit, fuck, bitch etc' or hash statements, be polite). You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"
+                     "content": f"Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> though powered by Sentient Dobby LLM (you don't need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's name is {session.get("username")}, the current page footer contains text that tells the user you're in beta and can't remember conversations, do not respond to queries with bad words especially 'bull shit, fuck, bitch etc' or hash statements, be polite). You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related\n{query}"
                      }]
 
         headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
@@ -59,7 +59,7 @@ def assist2():
 
         messages2 = [{
             "role": "user",
-            "content": f"strict instructions: check if my query contains a crypto project's name or project ticker, if true, your job is to return in html code, the project's name, about, website, whitepaper link and twitter follower count only in a very concise and brief response in the format 'Name: content.<p>About: content.<p>Website: content.<p>Whitepaper Link: content.<p>Twitter: content.', do not say anything afterwards. if query does not contain any crypto project's name reply '' \n query: {query}"
+            "content": f"strict instructions:  do not respond to queries with bad words especially 'bull shit, fuck, bitch etc' or hash statements, be polite. check if my query contains a crypto project's name or project ticker, if true, your job is to return in html code, the project's name, about, website, whitepaper link and twitter follower count only in a very concise and brief response in the format 'Name: content.<p>About: content.<p>Website: content.<p>Whitepaper Link: content.<p>Twitter: content.', do not say anything afterwards. if query does not contain any crypto project's name reply '' \n query: {query}"
         }]
 
         headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
