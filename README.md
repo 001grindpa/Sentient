@@ -1,6 +1,6 @@
 # ProjectX
 ## R2-W3
-### About R2-W3
+### About R2-W3 https://img.shields.io/badge/Powered%20By-Dobby%20LLM-Blue
 This intelligent agent streamlines Web3 project research by automatically gathering and analyzing key information from sources like Twitter, Crunchbase, DeFiLlama, and GitHub. It identifies investors, funding rounds, token data, and roadmap milestones, then summarizes whitepapers and community traction using advanced LLM reasoning.
 
 Built with the Sentient AGI Framework, the agent operates asynchronously, coordinating tasks efficiently allowing real-time insights, ranking of projects by investor quality, and sentiment-based scoring.
@@ -20,3 +20,4 @@ Project Ranking
 ### Installation
 ``` bash
 git clone https://github.com/001grindpa/Sentient.git
+
