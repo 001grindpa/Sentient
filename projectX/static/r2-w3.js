@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 chatZone.scrollTop = chatZone.scrollHeight;
             }, 2000);
             
-            // response 1
+            // response 2
             let response2 = await fetch("/assist2", {
                 method: "POST",
                 headers: {
