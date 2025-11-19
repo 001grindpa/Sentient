@@ -1,31 +1,33 @@
 from flask import Flask, session, render_template, redirect, request, url_for, jsonify
 from flask_session import Session
 from cs50 import SQL
-import httpx
-import os
-from dotenv import load_dotenv
 from random import randint
-load_dotenv()
+from process import *
 
 db = SQL("sqlite:///r2-w3.db")
 
 app = Flask(__name__)
-api_key = os.getenv("FIREWORKS_API_KEY")
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+def general():
+    user = db.execute("SELECT * FROM userData WHERE username = ?", session.get("username"))
+    if user:
+        for data in user:
+            name = data.get("full_name")
+            username = data.get("username")
+            return [name, username]
+    else:
+        user = ["", ""]
+        return user
+
 @app.context_processor
 def gen():
-    full_name = db.execute("SELECT full_name FROM userData WHERE username = ?", session.get("username"))
-    if full_name:
-        for f_name in full_name:
-            name = f_name.get("full_name")
-            return dict(name = name)
-    else:
-        return dict(name = "")
-
+    full_name = general()
+    return dict(name = full_name[0])
+      
 @app.route("/", methods=["GET", "POST"])
 def index():
     if not session.get("username"):
@@ -34,7 +36,7 @@ def index():
     start = {
         1: "what's on your mind?", 2: "how do we start off?",
         3: "let's hit the road running haha.", 4: "how can I assist you?",
-        5: "I'm R2, can't wait to work with you.", 6: "let's talk about that web3 stuff."
+        5: "I'm R2, can't wait to work with you.", 6: "let's discuss DeFi."
         }
     msg = start[n]
 
@@ -43,56 +45,19 @@ def index():
 @app.route("/assist1", methods=["POST", "GET"])
 def assist1():
     if request.method == "POST":
-        user_prompt = request.json["query"]
-        # query = request.form.get("q")
-        full_name = db.execute("SELECT full_name FROM userData WHERE username = ?", session.get("username"))
-        for f_name in full_name:
-            name = f_name.get("full_name")
-        system_prompt = f"Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> though powered by Sentient Dobby LLM (you don't need to introduce yourself unless told to. If you're greeted, reply to greetings well, don't say 'affirmative'. The user's username is @{session.get("username")} and their actual name is {name}, address them by their actual name, the current page footer contains text that tells the user you're in beta and can't remember conversations, do not respond to queries with bad words especially 'bull shit, fuck, bitch etc' or hash statements, be polite). You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related, when asked about crypto live data, search https://coinmarketcap.com/"
+        query = request.json["query"]
         
-        messages = [{
-                        "role": "system",
-                        "content": system_prompt
-                     },
-                     {   
-                        "role": "user",
-                        "content": user_prompt
-                     }]
-
-        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-
-        payload = {"model": "accounts/sentientfoundation/models/dobby-unhinged-llama-3-3-70b-new",
-                   "messages": messages,
-                   "max_tokens": 500,
-                   }
-        
-        r = httpx.post("https://api.fireworks.ai/inference/v1/chat/completions", headers=headers, json=payload)
-        
-        data = r.json()
-        print(data)
-        return jsonify({"msg": data["choices"][0]["message"]["content"]})
+        info = general()
+        r = get_response("x", f"query: {query}, my full name: {info[0]}, username: {info[1]}")
+        return jsonify({"msg": r})
 
 @app.route("/assist2", methods=["POST", "GET"])
 def assist2():
     if request.method == "POST":
         query = request.json["query"]
-        system_prompt = "strict instructions: do not respond to queries with bad words especially 'bull shit, fuck, bitch etc' or hash statements, be polite. check if my query contains a crypto project's name or project ticker, if true, your job is to return in html code, the project's name, about, website, whitepaper link and twitter follower count only in a very concise and brief response in the format 'Name: content.<p>About: content.<p>Website: content.<p>Whitepaper Link: content.<p>Twitter: content.', do not say anything afterwards. if query does not contain any crypto project's name reply ''"
-
-        messages2 = [{"role": "system", "content": system_prompt}, 
-                     {"role": "user", "content": query}]
-
-        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-
-        payload2 = {"model": "accounts/sentientfoundation/models/dobby-unhinged-llama-3-3-70b-new",
-                   "messages": messages2,
-                   "max_tokens": 150,
-                   }
         
-        r2 = httpx.post("https://api.fireworks.ai/inference/v1/chat/completions", headers=headers, json=payload2)
-
-        data = r2.json()
-        print(data)
-        return jsonify({"msg": data["choices"][0]["message"]["content"]})
+        r = get_project_data(query)
+        return jsonify({"msg": r})
 
 @app.route("/landing")
 def landing():
