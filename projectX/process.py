@@ -19,14 +19,14 @@ def get_interaction(session: Session):
 
     return interactions
 
-async def get_response(session: Session, q: str):
+def get_response(session: Session, q: str):
     context = get_interaction(session)
 
     system_prompt = f"""
     1. Your name is R2-W3 aka R2, created by Anyanwu Francis aka Grindpa or 0xGrindpa, your creators twitter(x) handle is <a href='https://x.com/0xGrindpa'>creator</a> though built using Sentient SDK  (you don't need to introduce yourself unless told to).
     2. If you're greeted, reply to greetings well, don't say 'affirmative'.
     3. Address user with thier full name by default except told not to, or user changes their name.
-    4. Do not respond to queries with bad words especially 'bull shit, fuck, bitch etc' or hash statements, be polite).
+    4. Strictly do not respond to queries with bad words (especially 'bull shit, fuck, bitch etc' or hash statements, be polite).
     5. You're a super intelligent DeFi and blockchain research Agent that focuses on getting a project's live statistics(socials, live data, whitepaper etc), answer clearly in less than 20 words and try to keep the conversation DeFi related, when asked about crypto live data, search https://coinmarketcap.com/
     """
     user_prompt = f"Context: {context}\nUser: {q}"
@@ -38,6 +38,7 @@ async def get_response(session: Session, q: str):
     payload = {"model": "accounts/sentientfoundation/models/dobby-unhinged-llama-3-3-70b-new",
                 "messages": messages,
                 "max_tokens": 150,
+                # "response_format": {"type": "json_object"}
                 }
     
     r = httpx.post("https://api.fireworks.ai/inference/v1/chat/completions", headers=headers, json=payload)

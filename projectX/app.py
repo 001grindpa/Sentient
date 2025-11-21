@@ -2,7 +2,7 @@ from flask import Flask, session, render_template, redirect, request, url_for, j
 from flask_session import Session
 from cs50 import SQL
 from random import randint
-from process import *
+from process import get_project_data, get_response
 
 db = SQL("sqlite:///r2-w3.db")
 
@@ -48,7 +48,7 @@ def assist1():
         query = request.json["query"]
         
         info = general()
-        r = get_response("x", f"query: {query}, my full name: {info[0]}, username: {info[1]}")
+        r = get_response(f"query: {query}, my full name: {info[0]}, username: {info[1]}")
         return jsonify({"msg": r})
 
 @app.route("/assist2", methods=["POST", "GET"])
