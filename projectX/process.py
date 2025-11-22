@@ -19,7 +19,7 @@ def get_interaction(session: Session):
 
     return interactions
 
-def get_response(session: Session, q: str):
+async def get_response(session: Session, q: str):
     context = get_interaction(session)
 
     system_prompt = f"""
